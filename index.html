@@ -10,33 +10,36 @@
   <body>
     <h1>Rock Paper Scissors game</h1>
     <div class="choices">
-      <div class="choice" id="rock">
-        <img src="./image/rock.jpg" />
-      </div>
-      <div class="choice" id="paper">
-        <img src="./image/paper.jpg" />
-      </div>
-      <div class="choice" id="scissors">
-        <img src="./image/scissors.jpg" />
-      </div>
+      <button class="choice" id="rock">
+        <h2>ROCK</h2>
+      </button>
+      <button class="choice" id="paper">
+        <h2>PAPER</h2>
+      </button>
+      <button class="choice" id="scissors">
+        <h2>SCISSORS</h2>
+      </button>
     </div>
 
-    <div class="score-board">
+    <div class="scoreBoard">
       <div class="score">
-        <p id="user-score">0</p>
+        <p id="userScore">0</p>
         <p id="name">You</p>
       </div>
+      Vs
       <div class="score">
-        <p id="comp-score">0</p>
+        <p id="score">0</p>
         <p>Computer</p>
       </div>
     </div>
 
-    <div class="msg-container">
-        <button onclick="play()">
-
-            <p id="msg">PLAY</p>
-        </button>
+    <div class="msgCotainer">
+      <button onclick="play()"> 
+        <p id="msg">PLAY</p>
+      </button>
+    </div>
+    <div class="smsc">
+      <p id="sms">Result</p>
     </div>
     <script src="./script.js"></script>
   </body>
