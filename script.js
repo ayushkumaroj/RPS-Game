@@ -1,61 +1,48 @@
-let score1 = 0;
-let score2 = 0;
-const ch = document.querySelectorAll(".choice");
-const message = document.querySelector("#msg");
+function play() {
+  let name = prompt("Enter your name:","Ayush");
+  document.querySelector("#name").innerHTML = name;
+  document.querySelector("#msg").innerHTML='Play again';
 
-const score1Para = document.querySelector("#user-score");
-const score2Para = document.querySelector("#comp-score");
-const generateCompChoice = () => {
-  const options = ["rock", "paper", "scissors"];
-  const randIdx = Math.floor(Math.random() * 3);
-  return options[randIdx];
-};
-const draw = () => {
-  message.innerText = "Play Again";
-  message.style.backgroundColor = "#081b31";
-};
-const displayWinner = (userWin, userChoice, compChoice) => {
-  if (userWin) {
-    score1++;
-    score1Para.innerText = score1;
-    message.innerText = `Aap Jitt gye ${userChoice} beats ${compChoice}`;
-    message.style.backgroundColor = "green";
-  } else {
-    score2++;
-    score2Para.innerText = score2;
-    message.innerText = `Aap Haar gye ${compChoice} beats Apka ${userChoice}`;
-    message.style.backgroundColor = "red";
-  }
-};
-const playRound = (userChoice) => {
-  
-  const compChoice = generateCompChoice();
+  let userScore = 0;
+  let cmpScore = 0;
 
-  if (userChoice === compChoice) {
-    draw();
-  } else {
-    let userWin = true;
-    if (userChoice === "rock") {
-      // Scissors, paper
-      userWin = compChoice === "paper" ? false : true;
-    } else if (userChoice === "paper") {
+  const arr = ['rock', 'paper', 'scissors'];
 
-      userWin = compChoice === "scissors" ? false : true;
-    } else {
-      
-      userWin = compChoice === "rock" ? false : true;
-    }
-    displayWinner(userWin, userChoice, compChoice);
-  }
-};
-ch.forEach((choice) => {
-  choice.addEventListener("click", () => {
-    const userChoice = choice.getAttribute("id");
-    playRound(userChoice);
+  const rock = document.querySelector("#rock");
+  const paper = document.querySelector("#paper");
+  const scissors = document.querySelector("#scissors");
+
+  rock.addEventListener('click', function () {
+    playGame('rock');
   });
-});
 
-function play(){
-    let name = prompt("Enter your name");
-    document.querySelector("#name").innerHTML=name;
+  paper.addEventListener('click', function () {
+    playGame('paper');
+  });
+
+  scissors.addEventListener('click', function () {
+    playGame('scissors');
+  });
+
+  function playGame(userChoice) {
+    const ran = Math.floor(Math.random() * 3);
+    const cmpChoice = arr[ran];
+
+    if (userChoice === cmpChoice) {
+      // Draw
+      document.querySelector("#sms").innerHTML = "Match draw";
+    } else if ((userChoice === "rock" && cmpChoice === "scissors") ||
+      (userChoice === "paper" && cmpChoice === "rock") ||
+      (userChoice === "scissors" && cmpChoice === "paper")) {
+      // User wins
+      userScore++;
+      document.querySelector("#userScore").innerHTML = userScore;
+      document.querySelector("#sms").innerHTML = "You win!";
+    } else {
+      // Computer wins
+      cmpScore++;
+      document.querySelector("#score").innerHTML = cmpScore;
+      document.querySelector("#sms").innerHTML = "You lose!";
+    }
+  }
 }
